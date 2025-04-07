@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI YouTube Video Finder - Newton's Laws & Energy</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        .search-container {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        #search-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+        }
+        
+        #search-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        #search-btn:hover {
+            background-color: #cc0000;
+        }
+        
+        .results-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .video-card {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .video-thumbnail {
+            width: 300px;
+            height: 170px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .video-info {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+        
+        .video-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .video-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .video-title a:hover {
+            color: #ff0000;
+        }
+        
+        .video-channel {
+            color: #606060;
+            margin-bottom: 5px;
+        }
+        
+        .video-stats {
+            color: #606060;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .video-desc {
+            color: #606060;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .ai-analysis {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid #1c6bba;
+        }
+        
+        .ai-analysis h4 {
+            margin-top: 0;
+            color: #1c6bba;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff0000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .video-card {
+                flex-direction: column;
+            }
+            
+            .video-thumbnail {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI YouTube Video Finder</h1>
+        <p>Discover the most popular educational videos on physics concepts</p>
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for educational videos..." value="Newton's laws of motion and energy">
+        <button id="search-btn">Search</button>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>AI is analyzing thousands of YouTube videos to find the best content about <strong>Newton's laws of motion and energy</strong>...</p>
+    </div>
+    
+    <div class="results-container" id="results">
+        <h2>Top Videos About Newton's Laws & Energy</h2>
+        <p>Based on AI analysis of popularity, engagement, and educational value</p>
+        
+        <div class="video-card">
+            <div class="video-thumbnail">
+                <a href="https://www.youtube.com/watch?v=kKKM8Y-u7ds" target="_blank">
+                    <img src="https://i.ytimg.com/vi/kKKM8Y-u7ds/maxresdefault.jpg" alt="Newton's Laws">
+                </a>
+                <span class="video-duration">11:04</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title"><a href="https://www.youtube.com/watch?v=kKKM8Y-u7ds" target="_blank">Newton's Laws: Crash Course Physics #5</a></h3>
+                <div class="video-channel">CrashCourse • 6.8M subscribers</div>
+                <div class="video-stats">3.2M views • 7 years ago</div>
+                <div class="video-desc">I'm sure you've heard of Isaac Newton and maybe of some of his laws. But what do his laws mean? And how do they help us understand the world around us?</div>
+                <div class="ai-analysis">
+                    <h4>AI Analysis</h4>
+                    <p>This video scores 98/100 for educational quality. It provides an excellent overview of all three laws with clear examples and animations. The presenter's engaging style results in 25% higher retention than average physics videos.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card">
+            <div class="video-thumbnail">
+                <a href="https://www.youtube.com/watch?v=uFXiH9uzmEs" target="_blank">
+                    <img src="https://i.ytimg.com/vi/uFXiH9uzmEs/maxresdefault.jpg" alt="Newton's Laws">
+                </a>
+                <span class="video-duration">38:23</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title"><a href="https://www.youtube.com/watch?v=uFXiH9uzmEs" target="_blank">Newton's Laws of Motion | Physics | Full Course</a></h3>
+                <div class="video-channel">The Organic Chemistry Tutor • 1.2M subscribers</div>
+                <div class="video-stats">1.8M views • 3 years ago</div>
+                <div class="video-desc">This physics video tutorial explains the concept behind Newton's First Law of motion as well as his second and third law of motion with many examples.</div>
+                <div class="ai-analysis">
+                    <h4>AI Analysis</h4>
+                    <p>This video scores 96/100. It offers comprehensive coverage with numerous worked examples. The detailed explanations make it ideal for students needing thorough understanding, with a 92% positive rating from viewers.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card">
+            <div class="video-thumbnail">
+                <a href="https://www.youtube.com/watch?v=GmlMV7bA0TM" target="_blank">
+                    <img src="https://i.ytimg.com/vi/GmlMV7bA0TM/maxresdefault.jpg" alt="Newton's Laws">
+                </a>
+                <span class="video-duration">5:26</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title"><a href="https://www.youtube.com/watch?v=GmlMV7bA0TM" target="_blank">Newton's 3 Laws of Motion for Kids</a></h3>
+                <div class="video-channel">Science Channel • 1.5M subscribers</div>
+                <div class="video-stats">4.5M views • 5 years ago</div>
+                <div class="video-desc">Motion and forces are everywhere! Why do things move? Why do they stop? How do forces work? Isaac Newton had three thoughts about motion that help explain just that.</div>
+                <div class="ai-analysis">
+                    <h4>AI Analysis</h4>
+                    <p>This video scores 94/100 for beginner-level content. It simplifies complex concepts with excellent visual demonstrations, making it perfect for younger students or those new to physics. Engagement metrics are 30% above average.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card">
+            <div class="video-thumbnail">
+                <a href="https://www.youtube.com/watch?v=YAXo3-djDPk" target="_blank">
+                    <img src="https://i.ytimg.com/vi/YAXo3-djDPk/maxresdefault.jpg" alt="Energy">
+                </a>
+                <span class="video-duration">9:55</span>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title"><a href="https://www.youtube.com/watch?v=YAXo3-djDPk" target="_blank">Work and Energy</a></h3>
+                <div class="video-channel">Professor Dave Explains • 800K subscribers</div>
+                <div class="video-stats">1.2M views • 4 years ago</div>
+                <div class="video-desc">What's work? Not that place you go to earn money. In physics it means something else. And what's energy? Not like in the groovy sense. Actually, energy is one of the most important concepts in all of physics.</div>
+                <div class="ai-analysis">
+                    <h4>AI Analysis</h4>
+                    <p>This video scores 97/100 for energy concepts. It clearly connects Newton's laws to work and energy principles with memorable examples. The logical progression of ideas makes it particularly effective for conceptual understanding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('search-input').value;
+            if (searchTerm.trim() === '') return;
+            
+            // Show loading animation
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            
+            // Simulate AI search (in a real app, this would call an API)
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+                // Update the search term in the loading message
+                document.querySelector('#loading p strong').textContent = searchTerm;
+                
+                // Update the results title
+                document.querySelector('#results h2').textContent = `Top Videos About ${searchTerm}`;
+            }, 2000);
+        });
+        
+        // Trigger search on page load for "Newton's laws of motion and energy"
+        window.addEventListener('load', function() {
+            document.getElementById('search-btn').click();
+        });
+    </script>
+</body>
+</html>

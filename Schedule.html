@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery Schedule</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 2px solid #fff;
+            margin-bottom: -2px;
+            color: #3498db;
+        }
+        .subject-content {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .subject-content.active {
+            display: block;
+        }
+        .week {
+            margin-bottom: 25px;
+        }
+        .week h2 {
+            color: #3498db;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+        .day {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        .day:last-child {
+            border-bottom: none;
+        }
+        .day strong {
+            color: #e74c3c;
+        }
+        .practice {
+            background-color: #e8f4fc;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .math { border-left-color: #3498db; }
+        .chemistry { border-left-color: #e74c3c; }
+        .physics { border-left-color: #9b59b6; }
+        .cs { border-left-color: #2ecc71; }
+    </style>
+</head>
+<body>
+    <h1>30-Day Mastery Schedule</h1>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="openSubject('math')">Mathematics</div>
+        <div class="tab" onclick="openSubject('chemistry')">Chemistry</div>
+        <div class="tab" onclick="openSubject('physics')">Physics</div>
+        <div class="tab" onclick="openSubject('cs')">Computer Science</div>
+    </div>
+
+    <!-- Math Content -->
+    <div id="math" class="subject-content active">
+        <div class="week">
+            <h2 class="math">Week 1: Quadratic Equations</h2>
+            <div class="day">
+                <strong>Day 1:</strong> Introduction to Quadratics<br>
+                - Standard form and factoring<br>
+                <div class="practice">Practice: 10 factoring problems</div>
+            </div>
+            <div class="day">
+                <strong>Day 2:</strong> Quadratic Formula<br>
+                - Derivation and applications<br>
+                <div class="practice">Practice: Solve 8 equations</div>
+            </div>
+            <!-- More math days... -->
+        </div>
+        <div class="week">
+            <h2 class="math">Week 2: Polynomials</h2>
+            <div class="day">
+                <strong>Day 8:</strong> Polynomial Operations<br>
+                - Addition, subtraction, multiplication<br>
+                <div class="practice">Practice: Simplify 6 expressions</div>
+            </div>
+            <!-- More math weeks... -->
+        </div>
+    </div>
+
+    <!-- Chemistry Content -->
+    <div id="chemistry" class="subject-content">
+        <div class="week">
+            <h2 class="chemistry">Week 1: Atomic Structure</h2>
+            <div class="day">
+                <strong>Day 1:</strong> Atoms and Subatomic Particles<br>
+                - Protons, neutrons, electrons<br>
+                <div class="practice">Practice: Calculate atomic numbers</div>
+            </div>
+            <div class="day">
+                <strong>Day 2:</strong> Electron Configuration<br>
+                - Orbitals and quantum numbers<br>
+                <div class="practice">Practice: Write configurations for 5 elements</div>
+            </div>
+            <!-- More chemistry days... -->
+        </div>
+        <div class="week">
+            <h2 class="chemistry">Week 2: Chemical Bonding</h2>
+            <div class="day">
+                <strong>Day 8:</strong> Ionic Bonds<br>
+                - Formation and properties<br>
+                <div class="practice">Practice: Predict 4 ionic compounds</div>
+            </div>
+            <!-- More chemistry weeks... -->
+        </div>
+    </div>
+
+    <!-- Physics Content -->
+    <div id="physics" class="subject-content">
+        <div class="week">
+            <h2 class="physics">Week 1: Mechanics</h2>
+            <div class="day">
+                <strong>Day 1:</strong> Kinematics Basics<br>
+                - Displacement, velocity, acceleration<br>
+                <div class="practice">Practice: Solve 5 motion problems</div>
+            </div>
+            <div class="day">
+                <strong>Day 2:</strong> Newton's Laws<br>
+                - Force, mass, and acceleration<br>
+                <div class="practice">Practice: Apply to 3 scenarios</div>
+            </div>
+            <!-- More physics days... -->
+        </div>
+        <div class="week">
+            <h2 class="physics">Week 2: Energy</h2>
+            <div class="day">
+                <strong>Day 8:</strong> Work and Power<br>
+                - Calculations and units<br>
+                <div class="practice">Practice: Solve 4 work problems</div>
+            </div>
+            <!-- More physics weeks... -->
+        </div>
+    </div>
+
+    <!-- Computer Science Content -->
+    <div id="cs" class="subject-content">
+        <div class="week">
+            <h2 class="cs">Week 1: Programming Basics</h2>
+            <div class="day">
+                <strong>Day 1:</strong> Introduction to Python<br>
+                - Variables and data types<br>
+                <div class="practice">Practice: Write 3 simple programs</div>
+            </div>
+            <div class="day">
+                <strong>Day 2:</strong> Control Structures<br>
+                - If-else, loops<br>
+                <div class="practice">Practice: Create a number guesser</div>
+            </div>
+            <!-- More CS days... -->
+        </div>
+        <div class="week">
+            <h2 class="cs">Week 2: Data Structures</h2>
+            <div class="day">
+                <strong>Day 8:</strong> Lists and Arrays<br>
+                - Operations and methods<br>
+                <div class="practice">Practice: Implement a to-do list</div>
+            </div>
+            <!-- More CS weeks... -->
+        </div>
+    </div>
+
+    <script>
+        function openSubject(subject) {
+            // Hide all subjects
+            document.querySelectorAll('.subject-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected subject and activate tab
+            document.getElementById(subject).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

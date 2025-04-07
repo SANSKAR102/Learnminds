@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses |  Learn Minds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .user-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--accent);
+        }
+        
+        .user-name {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+        
+        .nav-menu {
+            flex-grow: 1;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(74, 111, 165, 0.1);
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title h1 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title p {
+            color: #6c757d;
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 1px solid #ced4da;
+            padding: 0 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .course-info {
+            padding: 1.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-subject {
+            display: inline-block;
+            background: rgba(74, 111, 165, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .course-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .view-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .view-btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .search-filter {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">Learn<span>Minds</span></div>
+        
+        <div class="user-profile">
+            <img src="https://img.freepik.com/premium-photo/man-user-avatar-3d-render-icon-illustration-isolated-white-background_970137-105000.jpg" alt="User" class="user-avatar">
+            <h3 class="user-name">user</h3>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="home.html" class="nav-item">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="Mycourses.html" class="nav-item active">
+                <i class="fas fa-book"></i> My Courses
+            </a>
+            <a href="progress.html" class="nav-item">
+                <i class="fas fa-chart-line"></i> Progress
+            </a>
+            <a href="adaptivelearning.html" class="nav-item"> 
+                <i class="fas fa-robot"></i>  Adaptive learning
+            </a>
+            <a href="achievement.html" class="nav-item">
+                <i class="fas fa-trophy"></i> Achievements
+            </a>
+            <a href="groupstudy.html" class="nav-item">
+                <i class="fas fa-users"></i> Study Groups
+            </a>
+            <a href="Schedule.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i> Schedule
+            </a>
+             
+        </nav>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>My Courses</h1>
+                <p>All your enrolled courses in one place</p>
+            </div>
+        </div>
+        
+        <div class="search-filter">
+            <input type="text" class="search-box" placeholder="Search courses...">
+            
+            </button>
+        </div>
+        
+        <div class="courses-grid">
+            <!-- Course 1 -->
+            <div class="course-card">
+                <img src="https://t3.ftcdn.net/jpg/03/67/25/52/360_F_367255270_n8tefJq5zWIUDWXpVPUxcBt339aFR4D5.jpg" alt="Mathematics" class="course-image">
+                <div class="course-info">
+                     
+                    <h3 class="course-title">Mathematics</h3>
+                    <p class="course-description">
+                        Master quadratic equations, polynomials, and advanced algebraic concepts with interactive lessons.
+                    </p>
+                    <a href="mathematics.pdf" class="view-btn">
+                        <i class="fas fa-book-open"></i> View Course
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Course 2 -->
+            <div class="course-card">
+                <img src="https://t3.ftcdn.net/jpg/04/25/53/74/360_F_425537441_Av7ssV5P2RMWFtQSASHjwuYKvBgtcwId.jpg" alt="Physics" class="course-image">
+                <div class="course-info">
+                     
+                    <h3 class="course-title">Physics</h3>
+                    <p class="course-description">
+                        Understand motion, forces, and energy through interactive simulations and problem-solving.
+                    </p>
+                    <a href="physics.pdf" class="view-btn">
+                        <i class="fas fa-book-open"></i> View Course
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Course 3 -->
+            <div class="course-card">
+                <img src="https://cdn1.vectorstock.com/i/1000x1000/65/05/chemistry-homework-isometric-vector-21176505.jpg" alt="Chemistry" class="course-image">
+                <div class="course-info">
+                    <h3 class="course-title">Chemistry</h3>
+                    <p class="course-description">
+                        Explore types of chemical reactions, balancing equations, and reaction kinetics.
+                    </p>
+                    <a href="Chemistry .pdf" class="view-btn">
+                        <i class="fas fa-book-open"></i> View Course
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Course 4 -->
+            <div class="course-card">
+                <img src="https://cdn1.vectorstock.com/i/1000x1000/75/95/pixel-computer-logo-icon-design-vector-22627595.jpg" alt="Computer Science" class="course-image">
+                <div class="course-info">
+                    <h3 class="course-title">Computer Science</h3>
+                    <p class="course-description">
+                        Learn Python fundamentals, data structures, and algorithmic thinking through fun projects.
+                    </p>
+                    <a href="cs .pdf" class="view-btn">
+                        <i class="fas fa-book-open"></i> View Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Basic search functionality
+        document.querySelector('.search-box').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.course-card').forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                const desc = card.querySelector('.course-description').textContent.toLowerCase();
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Filter button functionality
+        document.querySelector('.filter-btn').addEventListener('click', function() {
+            alert('Filter options would appear here');
+        });
+    </script>
+</body>
+</html>

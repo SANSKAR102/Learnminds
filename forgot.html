@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | Learn Minds</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .auth-container {
+            display: flex;
+            width: 900px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .auth-card {
+            flex: 1;
+            padding: 3rem;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-header h1 {
+            color: #166088;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-header p {
+            color: #6c757d;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #4a6fa5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+        }
+        
+        .auth-btn {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-btn:hover {
+            background: #166088;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6c757d;
+        }
+        
+        .auth-footer a {
+            color: #4a6fa5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .auth-image {
+            flex: 1;
+            background: url('https://static.vecteezy.com/system/resources/previews/047/492/162/non_2x/a-man-thinking-about-a-question-3d-photo-free-png.png') center/cover;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                width: 90%;
+                margin: 2rem 0;
+            }
+            
+            .auth-image {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Reset Your Password</h1>
+                <p>Enter your email and we'll send you a link to reset your password</p>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                Password reset link has been sent to your email!
+            </div>
+            
+            <form class="auth-form" id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="Enter your registered email">
+                </div>
+                
+                <button type="submit" class="auth-btn">Send Reset Link</button>
+                
+                <div class="auth-footer">
+                    <p>Remember your password? <a href="login.html">Log in</a></p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="auth-image"></div>
+    </div>
+    
+    <script>
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            
+            // Basic validation
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            // Here you would typically send the email to your backend
+            console.log('Password reset requested for:', email);
+            
+            // Show success message and hide form
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('forgotPasswordForm').style.display = 'none';
+            
+            // In a real app, you would:
+            // 1. Send email to your backend API
+            // 2. Handle errors if email doesn't exist
+            // 3. Redirect to a confirmation page or show success message
+        });
+    </script>
+</body>
+</html>

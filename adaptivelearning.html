@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Learning Technology</title>
+    <style>
+        :root {
+            --primary: #4a6bff;
+            --secondary: #7e8ef1;
+            --light: #f8f9ff;
+            --dark: #2c3e50;
+            --success: #28a745;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        
+        .visualization {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .graph-container {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .bar {
+            width: 40px;
+            background: linear-gradient(to top, var(--primary), var(--secondary));
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 1s ease;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .difficulty-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+        
+        .scale-item {
+            text-align: center;
+            color: #6c757d;
+        }
+        
+        .active-scale {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .demo-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .question-box {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .option {
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: var(--secondary);
+            background-color: #f0f3ff;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #e6ffed;
+            border-left: 4px solid var(--success);
+        }
+        
+        .incorrect {
+            background-color: #fff0f0;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .next-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .next-btn:hover {
+            background-color: #3a5ae8;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Adaptive Learning Technology</h1>
+        <p class="subtitle">Our AI adjusts question difficulty in real-time based on your performance to keep you challenged but not frustrated.</p>
+    </div>
+    
+    <div class="feature-container">
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Real-Time Assessment</h3>
+            <p class="feature-description">Our system continuously analyzes your responses to understand your current knowledge level and learning pace.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⚖️</div>
+            <h3 class="feature-title">Optimal Challenge</h3>
+            <p class="feature-description">Questions adapt to stay in your "zone of proximal development" - not too easy, not too hard, but just right for learning.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3 class="feature-title">Dynamic Adjustment</h3>
+            <p class="feature-description">Difficulty levels adjust fluidly based on your performance, ensuring continuous progress without frustration.</p>
+        </div>
+    </div>
+    
+    <div class="visualization">
+        <h2>How Our Adaptive Learning Works</h2>
+        <p>See how the system responds to your performance by adjusting question difficulty:</p>
+        
+        <div class="graph-container" id="graph">
+            <div class="bar" style="height: 100px;"><span class="bar-label">Q1</span></div>
+            <div class="bar" style="height: 130px;"><span class="bar-label">Q2</span></div>
+            <div class="bar" style="height: 180px;"><span class="bar-label">Q3</span></div>
+            <div class="bar" style="height: 150px;"><span class="bar-label">Q4</span></div>
+            <div class="bar" style="height: 200px;"><span class="bar-label">Q5</span></div>
+            <div class="bar" style="height: 170px;"><span class="bar-label">Q6</span></div>
+            <div class="bar" style="height: 220px;"><span class="bar-label">Q7</span></div>
+        </div>
+        
+        <div class="difficulty-scale">
+            <div class="scale-item">Basic</div>
+            <div class="scale-item">Easy</div>
+            <div class="scale-item active-scale">Medium</div>
+            <div class="scale-item">Hard</div>
+            <div class="scale-item">Advanced</div>
+        </div>
+    </div>
+    
+    <div class="demo-container">
+        <h2>Try Our Adaptive Learning</h2>
+        <p>Answer these sample questions to see how the system adjusts:</p>
+        
+        <div id="question-1" class="question-box">
+            <h3>Question 1 (Medium Difficulty)</h3>
+            <p>If a triangle has sides of length 5, 12, and x, and it's a right triangle, what is the possible value of x?</p>
+            
+            <div class="options">
+                <div class="option" onclick="checkAnswer(1, this, false)">A) 8</div>
+                <div class="option" onclick="checkAnswer(1, this, false)">B) 10</div>
+                <div class="option" onclick="checkAnswer(1, this, true)">C) 13</div>
+                <div class="option" onclick="checkAnswer(1, this, false)">D) 15</div>
+            </div>
+            
+            <div id="feedback-1" class="feedback">
+                <!-- Feedback will appear here -->
+            </div>
+        </div>
+        
+        <div id="question-2" class="question-box" style="display: none;">
+            <h3 id="q2-title">Question 2</h3>
+            <p id="q2-text">Loading next question based on your performance...</p>
+            
+            <div class="options" id="q2-options">
+                <!-- Options will be populated by JavaScript -->
+            </div>
+            
+            <div id="feedback-2" class="feedback">
+                <!-- Feedback will appear here -->
+            </div>
+        </div>
+        
+        <button id="next-btn" class="next-btn" style="display: none;" onclick="showNextQuestion()">Next Question</button>
+    </div>
+    
+    <script>
+        // Current difficulty level (starts at medium)
+        let currentDifficulty = 2; // 0-4 scale (0=basic, 4=advanced)
+        let answeredCorrectly = false;
+        
+        // Difficulty labels
+        const difficultyLabels = ["Basic", "Easy", "Medium", "Hard", "Advanced"];
+        
+        // Sample questions by difficulty
+        const questions = {
+            0: { // Basic
+                text: "What is 3 × 4?",
+                options: ["7", "12", "9", "15"],
+                correct: 1
+            },
+            1: { // Easy
+                text: "Solve for x: 2x + 5 = 15",
+                options: ["5", "10", "7.5", "20"],
+                correct: 0
+            },
+            2: { // Medium
+                text: "If a triangle has sides of length 5, 12, and x, and it's a right triangle, what is the possible value of x?",
+                options: ["8", "10", "13", "15"],
+                correct: 2
+            },
+            3: { // Hard
+                text: "Find the derivative of f(x) = 3x² + 2eˣ - ln(x)",
+                options: ["6x + 2eˣ - 1/x", "3x + 2eˣ - 1/x", "6x + eˣ - 1/x", "6x + 2eˣ + 1/x"],
+                correct: 0
+            },
+            4: { // Advanced
+                text: "Evaluate the integral ∫(from 0 to π/2) cos²(x) dx",
+                options: ["π/2", "π/4", "1", "π/8"],
+                correct: 1
+            }
+        };
+        
+        function checkAnswer(qNum, element, isCorrect) {
+            // Disable all options
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt === element) {
+                    opt.style.backgroundColor = isCorrect ? '#e6ffed' : '#fff0f0';
+                    opt.style.borderColor = isCorrect ? '#28a745' : '#dc3545';
+                }
+            });
+            
+            // Show feedback
+            const feedback = document.getElementById(`feedback-${qNum}`);
+            feedback.style.display = 'block';
+            feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedback.innerHTML = isCorrect 
+                ? '<strong>Correct!</strong> Well done! The system will increase difficulty slightly for the next question.'
+                : '<strong>Incorrect.</strong> The system will decrease difficulty slightly for the next question.';
+            
+            // Store performance
+            answeredCorrectly = isCorrect;
+            
+            // Show next button
+            document.getElementById('next-btn').style.display = 'block';
+            
+            // Update graph visualization
+            updateGraph();
+        }
+        
+        function showNextQuestion() {
+            // Adjust difficulty based on performance
+            if (answeredCorrectly && currentDifficulty < 4) {
+                currentDifficulty++;
+            } else if (!answeredCorrectly && currentDifficulty > 0) {
+                currentDifficulty--;
+            }
+            
+            // Hide current question
+            document.getElementById('question-1').style.display = 'none';
+            
+            // Show next question
+            const q2 = document.getElementById('question-2');
+            q2.style.display = 'block';
+            
+            // Update question based on difficulty
+            const question = questions[currentDifficulty];
+            document.getElementById('q2-title').textContent = `Question 2 (${difficultyLabels[currentDifficulty]} Difficulty)`;
+            document.getElementById('q2-text').textContent = question.text;
+            
+            // Update options
+            const optionsContainer = document.getElementById('q2-options');
+            optionsContainer.innerHTML = '';
+            question.options.forEach((opt, index) => {
+                const isCorrect = index === question.correct;
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = String.fromCharCode(65 + index) + ') ' + opt;
+                optionElement.onclick = function() { checkAnswer(2, this, isCorrect); };
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Hide next button until answer is selected
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('feedback-2').style.display = 'none';
+        }
+        
+        function updateGraph() {
+            const bars = document.querySelectorAll('.graph-container .bar');
+            bars.forEach((bar, index) => {
+                // Simulate some variation in the graph
+                let newHeight;
+                if (index < 3) {
+                    newHeight = 100 + (index * 40);
+                } else {
+                    newHeight = 150 + (index * 20) + (Math.random() * 30);
+                }
+                
+                // Adjust based on current performance
+                if (index >= 3) {
+                    if (answeredCorrectly) {
+                        newHeight += 30;
+                    } else {
+                        newHeight -= 20;
+                    }
+                }
+                
+                bar.style.height = `${newHeight}px`;
+            });
+            
+            // Update active difficulty scale
+            document.querySelectorAll('.scale-item').forEach((item, index) => {
+                item.classList.toggle('active-scale', index === currentDifficulty);
+            });
+        }
+        
+        // Initialize graph animation
+        setTimeout(() => {
+            updateGraph();
+        }, 500);
+    </script>
+</body>
+</html>

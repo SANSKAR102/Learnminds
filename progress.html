@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Progress Tracker</title>
+    <style>
+        :root {
+            --math-color: #e74c3c;
+            --physics-color: #3498db;
+            --chemistry-color: #2ecc71;
+            --cs-color: #9b59b6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .subject-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .subject-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s ease;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .subject-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .subject-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .math .subject-icon { background-color: var(--math-color); }
+        .physics .subject-icon { background-color: var(--physics-color); }
+        .chemistry .subject-icon { background-color: var(--chemistry-color); }
+        .cs .subject-icon { background-color: var(--cs-color); }
+        
+        .subject-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .progress-container {
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .math .progress-fill { background-color: var(--math-color); }
+        .physics .progress-fill { background-color: var(--physics-color); }
+        .chemistry .progress-fill { background-color: var(--chemistry-color); }
+        .cs .progress-fill { background-color: var(--cs-color); }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .topics-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .topic-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+        
+        .topic-checkbox {
+            margin-right: 10px;
+            accent-color: #2c3e50;
+        }
+        
+        .topic-name {
+            flex-grow: 1;
+        }
+        
+        .add-topic {
+            margin-top: 15px;
+            display: flex;
+        }
+        
+        .add-topic input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .add-topic button {
+            padding: 8px 15px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .add-topic button:hover {
+            background-color: #34495e;
+        }
+        
+        @media (max-width: 768px) {
+            .subject-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Academic Progress Tracker</h1>
+    
+    <div class="subject-container">
+        <!-- Math Card -->
+        <div class="subject-card math">
+            <div class="subject-header">
+                <div class="subject-icon">M</div>
+                <h2 class="subject-title">Mathematics</h2>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="math-progress" style="width: 35%;"></div>
+                </div>
+                <div class="progress-info">
+                    <span>Progress</span>
+                    <span id="math-percent">35%</span>
+                </div>
+            </div>
+            
+            <ul class="topics-list" id="math-topics">
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Algebra Basics</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Geometry</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Calculus</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Linear Algebra</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Probability</span>
+                </li>
+            </ul>
+            
+            <div class="add-topic">
+                <input type="text" placeholder="Add new topic..." id="math-new-topic">
+                <button onclick="addTopic('math')">Add</button>
+            </div>
+        </div>
+        
+        <!-- Physics Card -->
+        <div class="subject-card physics">
+            <div class="subject-header">
+                <div class="subject-icon">P</div>
+                <h2 class="subject-title">Physics</h2>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="physics-progress" style="width: 20%;"></div>
+                </div>
+                <div class="progress-info">
+                    <span>Progress</span>
+                    <span id="physics-percent">20%</span>
+                </div>
+            </div>
+            
+            <ul class="topics-list" id="physics-topics">
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Mechanics</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Thermodynamics</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Electromagnetism</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Optics</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Quantum Physics</span>
+                </li>
+            </ul>
+            
+            <div class="add-topic">
+                <input type="text" placeholder="Add new topic..." id="physics-new-topic">
+                <button onclick="addTopic('physics')">Add</button>
+            </div>
+        </div>
+        
+        <!-- Chemistry Card -->
+        <div class="subject-card chemistry">
+            <div class="subject-header">
+                <div class="subject-icon">C</div>
+                <h2 class="subject-title">Chemistry</h2>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="chemistry-progress" style="width: 45%;"></div>
+                </div>
+                <div class="progress-info">
+                    <span>Progress</span>
+                    <span id="chemistry-percent">45%</span>
+                </div>
+            </div>
+            
+            <ul class="topics-list" id="chemistry-topics">
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Atomic Structure</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Periodic Table</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Chemical Bonding</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Organic Chemistry</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Thermochemistry</span>
+                </li>
+            </ul>
+            
+            <div class="add-topic">
+                <input type="text" placeholder="Add new topic..." id="chemistry-new-topic">
+                <button onclick="addTopic('chemistry')">Add</button>
+            </div>
+        </div>
+        
+        <!-- Computer Science Card -->
+        <div class="subject-card cs">
+            <div class="subject-header">
+                <div class="subject-icon">CS</div>
+                <h2 class="subject-title">Computer Science</h2>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="cs-progress" style="width: 60%;"></div>
+                </div>
+                <div class="progress-info">
+                    <span>Progress</span>
+                    <span id="cs-percent">60%</span>
+                </div>
+            </div>
+            
+            <ul class="topics-list" id="cs-topics">
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Programming Basics</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Data Structures</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" checked>
+                    <span class="topic-name">Algorithms</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Database Systems</span>
+                </li>
+                <li class="topic-item">
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">Computer Networks</span>
+                </li>
+            </ul>
+            
+            <div class="add-topic">
+                <input type="text" placeholder="Add new topic..." id="cs-new-topic">
+                <button onclick="addTopic('cs')">Add</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Update progress when checkboxes are clicked
+        document.querySelectorAll('.topic-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateProgress(this.closest('.subject-card').classList[1]);
+            });
+        });
+        
+        // Function to update progress for a subject
+        function updateProgress(subject) {
+            const checkboxes = document.querySelectorAll(`.${subject} .topic-checkbox`);
+            const total = checkboxes.length;
+            let completed = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) completed++;
+            });
+            
+            const percent = Math.round((completed / total) * 100);
+            
+            document.getElementById(`${subject}-progress`).style.width = `${percent}%`;
+            document.getElementById(`${subject}-percent`).textContent = `${percent}%`;
+        }
+        
+        // Function to add new topic
+        function addTopic(subject) {
+            const input = document.getElementById(`${subject}-new-topic`);
+            const topicName = input.value.trim();
+            
+            if (topicName) {
+                const topicsList = document.getElementById(`${subject}-topics`);
+                const newItem = document.createElement('li');
+                newItem.className = 'topic-item';
+                newItem.innerHTML = `
+                    <input type="checkbox" class="topic-checkbox">
+                    <span class="topic-name">${topicName}</span>
+                `;
+                topicsList.appendChild(newItem);
+                input.value = '';
+                
+                // Add event listener to new checkbox
+                newItem.querySelector('.topic-checkbox').addEventListener('change', function() {
+                    updateProgress(subject);
+                });
+                
+                // Update progress with new unchecked item
+                updateProgress(subject);
+            }
+        }
+        
+        // Initialize progress on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateProgress('math');
+            updateProgress('physics');
+            updateProgress('chemistry');
+            updateProgress('cs');
+        });
+    </script>
+</body>
+</html>

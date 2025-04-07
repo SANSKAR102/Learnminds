@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Learn Minds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .user-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--accent);
+        }
+        
+        .user-name {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+        
+        .user-grade {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .nav-menu {
+            flex-grow: 1;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(74, 111, 165, 0.1);
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title h1 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title p {
+            color: #6c757d;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .notification-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #6c757d;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        
+        /* Dashboard Widgets */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .widget {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .widget-title {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .widget-value {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Continue Learning Section */
+        .continue-learning {
+            margin-top: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+        
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .subject-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .subject-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .subject-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .subject-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subject-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .subject-progress {
+            margin-bottom: 1rem;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 0.3rem;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .continue-btn:hover {
+            background: #3daee0;
+        }
+        
+        /* Recent Activity Section */
+        .recent-activity {
+            margin-top: 3rem;
+        }
+        
+        .activity-list {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(74, 111, 165, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+        
+        .activity-text {
+            flex-grow: 1;
+        }
+        
+        .activity-time {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            
+            .logo {
+                margin-bottom: 0;
+                margin-right: auto;
+            }
+            
+            .user-profile {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .nav-item {
+                margin-bottom: 0;
+                white-space: nowrap;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">Learn<span>Minds</span></div>
+        
+        <div class="user-profile">
+            <img src="https://img.freepik.com/premium-photo/man-user-avatar-3d-render-icon-illustration-isolated-white-background_970137-105000.jpg" alt="User" class="user-avatar">
+            <h3 class="user-name">User</h3>
+            <p class="user-grade">User Grade</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="home.html" class="nav-item active">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="Mycourses.html" class="nav-item">
+                <i class="fas fa-book"></i> My Courses
+            </a>
+            <a href="progress.html" class="nav-item">
+                <i class="fas fa-chart-line"></i> Progress
+            </a>
+            <a href="adaptivelearning.html" class="nav-item"> 
+                <i class="fas fa-robot"></i>  Adaptive learning
+            </a>
+            
+            <a href="achievement.html" class="nav-item">
+                <i class="fas fa-trophy"></i> Achievements
+            </a>
+            <a href="groupstudy.html" class="nav-item">
+                <i class="fas fa-users"></i> Study Groups
+            </a>
+            <a href="Schedule.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i> Schedule
+            </a>
+            
+            
+        </nav>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Welcome Back, User!</h1>
+                <p>Here's what's new in your journey</p>
+            </div>
+            <div class="user-actions">
+                <a href="index.html" class="logout-btn" style="text-decoration: none;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+        
+        <!-- Dashboard Stats -->
+        <div class="dashboard-grid">
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Learning Progress</h3>
+                    <span class="widget-value">0%</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Monthly Goal</span>
+                        <span>0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Current Streak</h3>
+                    <span class="widget-value">0 days</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Best: 12 days</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Points Earned</h3>
+                    <span class="widget-value">0</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Next Level: 2,000</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Continue Learning Section -->
+        <section class="continue-learning">
+            <div class="section-header">
+                <h2 class="section-title">Continue Learning</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            
+            <div class="subject-cards">
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <h3 class="subject-name">Maths</h3>
+                    <p class="subject-description">Quadratic equations and advanced functions</p>
+                    <div class="subject-progress">
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <a href="mathsquadratic.html" class="continue-btn" style="text-decoration: none;">
+                        <i class="fas fa-play"></i> Continue
+                    </a>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="subject-name">Physics</h3>
+                    <p class="subject-description">Newton's laws of motion and energy</p>
+                    <div class="subject-progress">
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <a href="chemistryprogress.html" class="continue-btn" style="text-decoration: none;">
+                        <i class="fas fa-play"></i> Continue
+                    </a>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="subject-name">Chemistry</h3>
+                    <p class="subject-description">Chemical bonds and reactions</p>
+                    <div class="subject-progress">
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=daPAcFFSFdY&list=PLF_7kfnwLFCGzzyaPRyNjSXRRR7W_qmny" class="continue-btn" style="text-decoration: none;">
+                        <i class="fas fa-play"></i> Continue
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recent Activity Section -->
+        <section class="recent-activity">
+            <div class="section-header">
+                <h2 class="section-title">Recent Activity</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                    </div>
+                    <div class="activity-text">
+                        Completed "Trigonometry Basics" lesson
+                    </div>
+                    <div class="activity-time">
+                        2 hours ago
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-medal" style="color: var(--warning);"></i>
+                    </div>
+                    <div class="activity-text">
+                        Earned "Math Whiz" badge
+                    </div>
+                    <div class="activity-time">
+                        Yesterday
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-users" style="color: var(--accent);"></i>
+                    </div>
+                    <div class="activity-text">
+                        Joined "Physics Study Group"
+                    </div>
+                    <div class="activity-time">
+                        2 days ago
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-book" style="color: var(--primary);"></i>
+                    </div>
+                    <div class="activity-text">
+                        Started new course "Introduction to Calculus"
+                    </div>
+                    <div class="activity-time">
+                        3 days ago
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // In a real app, you would check authentication token/session
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+            
+            // Logout functionality
+            const logoutBtn = document.querySelector('.logout-btn');
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
+            });
+            
+            // Continue buttons functionality
+            const continueBtns = document.querySelectorAll('.continue-btn');
+            continueBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const subject = this.closest('.subject-card').querySelector('.subject-name').textContent;
+                    alert(Continuing with ${subject}...);
+                    // In real app: window.location.href = 'course.html?subject=' + encodeURIComponent(subject);
+                });
+            });
+            
+            // Notification button
+            const notificationBtn = document.querySelector('.notification-btn');
+            notificationBtn.addEventListener('click', function() {
+                alert('Showing notifications...');
+                // In real app: show notifications dropdown
+            });
+        });
+    </script>
+</body>
+</html>
